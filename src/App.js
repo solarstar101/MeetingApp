@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Router } from "@reach/router";
+import firebase from "./Database/Firebase";
 
 import Home from "./Components/Home";
 import Welcome from "./Components/Welcome";
@@ -7,14 +9,23 @@ import Login from "./Components/Login";
 import Meetings from "./Components/Meetings";
 import Register from "./Components/Register";
 
-import { Router } from "@reach/router";
 export default class App extends Component {
   constructor() {
     super();
 
     this.state = {
-      user: "Mario"
+      user: null
     };
+  }
+
+  componentDidMount() {
+    const ref = firebase.database().ref("user");
+
+    ref.on("value", snapshot => {
+      let FBUser = snapshot.val();
+      this.setState({ user: FBUser });
+      console.log(FBUser);
+    });
   }
 
   render() {

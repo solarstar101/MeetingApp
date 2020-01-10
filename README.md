@@ -5,4 +5,4 @@ Tech used:
 React
 CSS Modules
 Firebase
-Reach Router good comparison vs react-router https://alligator.io/react/reach-router-vs-react-router/
+Reach Router. good comparison vs react-router can be found here -> https://alligator.io/react/reach-router-vs-react-router/

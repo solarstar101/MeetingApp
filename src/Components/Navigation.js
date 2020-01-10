@@ -5,6 +5,7 @@ import {
   FaSignOutAlt,
   FaRegPlusSquare
 } from "react-icons/fa";
+import { Link } from "@reach/router";
 
 export default class Navigation extends Component {
   render() {
@@ -13,27 +14,27 @@ export default class Navigation extends Component {
     return (
       <nav className="site-nav family-sans navbar navbar-expand bg-primary navbar-dark higher">
         <div className="container-fluid">
-          <a href="/" className="navbar-brand">
+          <Link to="/" className="navbar-brand">
             <FaUsers className="mr-1" /> Meeting Log
-          </a>
+          </Link>
           <div className="navbar-nav ml-auto">
             {user ? (
               <>
-                <a className="nav-item nav-link" href="/meetings">
+                <Link className="nav-item nav-link" to="/meetings">
                   Meetings
-                </a>
-                <a className="nav-item nav-link" href="/login">
+                </Link>
+                <Link className="nav-item nav-link" to="/login">
                   <FaSignOutAlt /> Log out
-                </a>
+                </Link>
               </>
             ) : (
               <>
-                <a className="nav-item nav-link" href="/register">
+                <Link className="nav-item nav-link" to="/register">
                   <FaRegPlusSquare /> Register
-                </a>
-                <a className="nav-item nav-link" href="/login">
+                </Link>
+                <Link className="nav-item nav-link" to="/login">
                   <FaSignInAlt /> Log In
-                </a>
+                </Link>
               </>
             )}
           </div>

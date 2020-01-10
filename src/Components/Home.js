@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styles from "./Styling/Home.module.css";
+import { Link } from "@reach/router";
 
 export default class Home extends Component {
   render(props) {
@@ -24,18 +25,18 @@ export default class Home extends Component {
             </p>
             {user === null ? (
               <>
-                <a href="/register" class="btn btn-outline-primary mr-2">
+                <Link to="/register" class="btn btn-outline-primary mr-2">
                   Register
-                </a>
-                <a href="/login" class="btn btn-outline-primary mr-2">
+                </Link>
+                <Link to="/login" class="btn btn-outline-primary mr-2">
                   Log In
-                </a>
+                </Link>
               </>
             ) : (
               <>
-                <a href="/meetings" class="btn btn-primary">
+                <Link to="/meetings" class="btn btn-primary">
                   {user}'s Meetings
-                </a>
+                </Link>
               </>
             )}
           </div>
