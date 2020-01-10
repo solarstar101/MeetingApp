@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Router } from "@reach/router";
+import { Router, navigate } from "@reach/router";
 import firebase from "./Database/Firebase";
 
 import Home from "./Components/Home";
@@ -14,31 +14,63 @@ export default class App extends Component {
     super();
 
     this.state = {
-      user: null
+      user: null,
+      displayName: null,
+      userID: null
     };
   }
 
   componentDidMount() {
-    const ref = firebase.database().ref("user");
-
-    ref.on("value", snapshot => {
-      let FBUser = snapshot.val();
-      this.setState({ user: FBUser });
-      console.log(FBUser);
+    firebase.auth().onAuthStateChanged(FBUser => {
+      FBUser &&
+        this.setState({
+          user: FBUser,
+          displayName: FBUser.displayName,
+          userID: FBUser.uid
+        });
     });
   }
+
+  registerUser = userName => {
+    firebase.auth().onAuthStateChanged(FBUser => {
+      FBUser.updateProfile({
+        displayName: userName
+      }).then(() => {
+        this.setState({
+          user: FBUser,
+          displayName: FBUser.displayName,
+          userID: FBUser.uid
+        });
+        navigate("/meetings");
+      });
+    });
+  };
+
+  logOutUser = e => {
+    e.preventDefault();
+    this.setState({
+      displayName: null,
+      userID: null,
+      user: null
+    });
+  };
 
   render() {
     return (
       <>
-        <Navigation user={this.state.user} />
-        {this.state.user && <Welcome user={this.state.user} />}
+        <Navigation logOutUser={this.logOutUser} user={this.state.user} />
+        {this.state.user && (
+          <Welcome
+            logOutUser={this.logOutUser}
+            userName={this.state.displayName}
+          />
+        )}
 
         <Router>
           <Home path="/" user={this.state.user} />
           <Login path="/login" />
           <Meetings path="/meetings" />
-          <Register path="/register" />
+          <Register registerUser={this.registerUser} path="/register" />
         </Router>
       </>
     );
