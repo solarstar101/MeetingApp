@@ -9,7 +9,7 @@ import { Link } from "@reach/router";
 
 export default class Navigation extends Component {
   render() {
-    const { user, logOutUser } = this.props;
+    const { loguser, logOutUser } = this.props;
 
     return (
       <nav className="site-nav family-sans navbar navbar-expand bg-primary navbar-dark higher">
@@ -18,7 +18,7 @@ export default class Navigation extends Component {
             <FaUsers className="mr-1" /> Meeting Log
           </Link>
           <div className="navbar-nav ml-auto">
-            {user ? (
+            {loguser ? (
               <>
                 <Link className="nav-item nav-link" to="/meetings">
                   Meetings

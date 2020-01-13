@@ -35,7 +35,7 @@ export default class Home extends Component {
             ) : (
               <>
                 <Link to="/meetings" class="btn btn-primary">
-                  {user}'s Meetings
+                  Meetings
                 </Link>
               </>
             )}

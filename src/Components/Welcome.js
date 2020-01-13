@@ -8,7 +8,7 @@ export default class Welcome extends Component {
     return (
       <div className="text-center mt-4">
         <span className={`text-secondary font-weight-bold pl-1`}>
-          Welcome {userName},
+          Welcome {userName}
           <Link
             to="/login"
             className={`font-weight-bold text-primary pl-1`}

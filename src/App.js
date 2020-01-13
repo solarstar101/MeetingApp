@@ -18,6 +18,8 @@ export default class App extends Component {
       displayName: null,
       userID: null
     };
+
+    this.updateLogin = this.updateLogin.bind(this);
   }
 
   componentDidMount() {
@@ -32,6 +34,10 @@ export default class App extends Component {
   }
 
   registerUser = userName => {
+    firebase.auth().updateLogin(userName);
+  };
+
+  updateLogin = userName => {
     firebase.auth().onAuthStateChanged(FBUser => {
       FBUser.updateProfile({
         displayName: userName
@@ -49,16 +55,16 @@ export default class App extends Component {
   logOutUser = e => {
     e.preventDefault();
     this.setState({
+      user: null,
       displayName: null,
-      userID: null,
-      user: null
+      userID: null
     });
   };
 
   render() {
     return (
       <>
-        <Navigation logOutUser={this.logOutUser} user={this.state.user} />
+        <Navigation logOutUser={this.logOutUser} loguser={this.state.user} />
         {this.state.user && (
           <Welcome
             logOutUser={this.logOutUser}
@@ -68,7 +74,7 @@ export default class App extends Component {
 
         <Router>
           <Home path="/" user={this.state.user} />
-          <Login path="/login" />
+          <Login updateLogin={this.updateLogin} path="/login" />
           <Meetings path="/meetings" />
           <Register registerUser={this.registerUser} path="/register" />
         </Router>
