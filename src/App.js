@@ -33,10 +33,6 @@ export default class App extends Component {
     });
   }
 
-  registerUser = userName => {
-    firebase.auth().updateLogin(userName);
-  };
-
   updateLogin = userName => {
     firebase.auth().onAuthStateChanged(FBUser => {
       FBUser.updateProfile({
@@ -59,8 +55,13 @@ export default class App extends Component {
       displayName: null,
       userID: null
     });
+    navigate("/login");
   };
 
+  addMeeting = meetingName => {
+    const ref = firebase.database().ref(`meetings/${this.state.user.uid}`);
+    ref.push({ meetingName: meetingName });
+  };
   render() {
     return (
       <>
@@ -75,8 +76,8 @@ export default class App extends Component {
         <Router>
           <Home path="/" user={this.state.user} />
           <Login updateLogin={this.updateLogin} path="/login" />
-          <Meetings path="/meetings" />
-          <Register registerUser={this.registerUser} path="/register" />
+          <Meetings addMeeting={this.addMeeting} path="/meetings" />
+          <Register registerUser={this.updateLogin} path="/register" />
         </Router>
       </>
     );

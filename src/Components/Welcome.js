@@ -10,7 +10,7 @@ export default class Welcome extends Component {
         <span className={`text-secondary font-weight-bold pl-1`}>
           Welcome {userName}
           <Link
-            to="/login"
+            to="/"
             className={`font-weight-bold text-primary pl-1`}
             onClick={e => logOutUser(e)}
           >

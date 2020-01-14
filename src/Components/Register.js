@@ -35,7 +35,9 @@ export default class Register extends Component {
       email: this.state.email,
       passOne: this.state.passOne
     };
+
     e.preventDefault();
+
     firebase
       .auth()
       .createUserWithEmailAndPassword(

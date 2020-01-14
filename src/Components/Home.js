@@ -3,7 +3,7 @@ import styles from "./Styling/Home.module.css";
 import { Link } from "@reach/router";
 
 export default class Home extends Component {
-  render(props) {
+  render() {
     const { user } = this.props;
 
     return (
